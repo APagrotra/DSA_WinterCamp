@@ -14,6 +14,17 @@ class node
         down = NULL;
     }
 };
+class node2
+{
+    public:
+    int data2;
+    node2* next2;
+    node2(int val)
+    {
+        data2 = val;
+        next2 = NULL;
+    }
+};
 
 void insertAtHead(node*  &head, int val){
     node* n = new node(val);
@@ -27,24 +38,25 @@ void insertAtTail(node*  &head, int val){
     node* temp = head;
     if(head==NULL){
         insertAtHead(head,val);
+        return;
     }
         while(temp->next!=NULL){
             temp=temp->next;
         }
         temp->next=n;
-    
+
 }
-void reverse(node* &head){
-    node* prev = NULL;
-    node* curr = head;
-    node* cnext = NULL;
-    while(curr!=NULL){
-        cnext=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=cnext;
+void insertAtBottom(node*  &head, int val){
+    node* n = new node(val);
+    node* temp = head;
+    if(head==NULL){
+        insertAtHead(head,val);
     }
-    head=prev;
+        while(temp->down!=NULL){
+            temp=temp->down;
+        }
+        temp->down=n;
+
 }
 
 void display(node* head){
@@ -56,21 +68,32 @@ void display(node* head){
     cout << "NULL";
     cout<< endl;
 }
+void display2(node* head){
+    node* temp = head;
+    while(temp!=NULL){
+        cout<<temp->data<<" -> ";
+        temp=temp->down;
+    }
+    cout << "NULL";
+    cout<< endl;
+}
 
 
 int main()
 {
     node* head=NULL;
-    insertAtHead(head,10);
-    insertAtHead(head,20);
-    insertAtHead(head,40);
-    insertAtTail(head,30);
+    // insertAtHead(head,10);
+    insertAtTail(head,5);
+    insertAtTail(head,11);
+    insertAtTail(head,19);
+    insertAtTail(head,20);
     insertAtTail(head,50);
-    insertAtTail(head,70);
-    insertAtTail(head,60);
     display(head);
-    reverse(head);
-    display(head);
+    
+    insertAtBottom(head,9);
+    insertAtBottom(head,11);
+    insertAtBottom(head,13); 
+    display2(head);
     
     
     return 0;

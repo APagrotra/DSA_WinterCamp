@@ -25,6 +25,7 @@ void insertAtTail(node*  &head, int val){
     node* temp = head;
     if(head==NULL){
         insertAtHead(head,val);
+        return
     }
         while(temp->next!=NULL){
             temp=temp->next;

@@ -14,22 +14,27 @@ class node{
 };
 
 void inorder(node* root){
-    if(root==NULL){
-        return;
+    if(root != NULL){
+        inorder(root->left);
+        cout << root->key << " ";
+        inorder(root->right);
     }
-    inorder(root->left);
-    cout << root->key << " ";
-    inorder(root->right);
 }
 
-bool checkBT(node* root){
-    if(root==NULL){
-        return true;
+int maxEle(node* root){
+    if(root == NULL){
+        return INT_MIN;
+    }else{
+        return max(root->key , max(maxEle(root->right), maxEle(root->left)));
     }
-    if((root->left && root->right == NULL) || (root->right && root->left == NULL)){
-        return false;
+}
+
+int minEle(node* root){
+    if(root == NULL){
+        return INT_MAX;
+    }else{
+        return min(root->key , min(minEle(root->right), minEle(root->left)));
     }
-    return checkBT(root->left)&&checkBT(root->right);
 }
 
 int main()
@@ -41,8 +46,10 @@ int main()
     root->left->right = new node(50);
     root->right->left = new node(60);
     root->right->right = new node(70);
-    // root->right->right->left = new node(80);
 
     inorder(root);
-    cout << "\n" <<checkBT(root) << endl;
+    cout << endl;
+    cout << maxEle(root) << endl;
+    cout << minEle(root) << endl;
+    return 0;
 }

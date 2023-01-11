@@ -14,22 +14,19 @@ class node{
 };
 
 void inorder(node* root){
-    if(root==NULL){
-        return;
+    if(root != NULL){
+        inorder(root->left);
+        cout << root->key << " ";
+        inorder(root->right);
     }
-    inorder(root->left);
-    cout << root->key << " ";
-    inorder(root->right);
 }
 
-bool checkBT(node* root){
-    if(root==NULL){
-        return true;
+int getSize(node* root){
+    if(root == NULL){
+        return 0;
+    }else{
+        return 1 + getSize(root->left) + getSize(root->right);
     }
-    if((root->left && root->right == NULL) || (root->right && root->left == NULL)){
-        return false;
-    }
-    return checkBT(root->left)&&checkBT(root->right);
 }
 
 int main()
@@ -41,8 +38,10 @@ int main()
     root->left->right = new node(50);
     root->right->left = new node(60);
     root->right->right = new node(70);
-    // root->right->right->left = new node(80);
 
     inorder(root);
-    cout << "\n" <<checkBT(root) << endl;
+    cout << endl;
+    int count = 0;
+    cout << getSize(root) << endl;
+    return 0;
 }
